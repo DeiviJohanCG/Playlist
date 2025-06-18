@@ -140,6 +140,28 @@ export class ListaFormComponent implements OnInit {
     });
   }
 
+  buscarLista(): void {
+    this.mensajeBusqueda = '';
+    this.listaEncontrada = null;
+
+    const nombre = this.nombreBusqueda.trim();
+
+    if (!nombre) {
+      this.mensajeBusqueda = 'Debes ingresar el nombre de la lista a buscar.';
+      return;
+    }
+
+    this.apiService.obtenerListaPorNombre(nombre).subscribe({
+      next: (lista) => {
+        this.listaEncontrada = lista;
+      },
+      error: (err) => {
+        this.mensajeBusqueda = `No se encontró ninguna lista con el nombre "${nombre}".`;
+        console.error(err);
+      }
+    });
+  }
+
   eliminarLista(nombre: string): void {
       this.apiService.eliminarLista(nombre).subscribe({
         next: () => {
@@ -151,6 +173,13 @@ export class ListaFormComponent implements OnInit {
           console.error(err);
         }
       });
+  }
+
+  limpiarBusqueda(): void {
+    this.nombreBusqueda = '';
+    this.listaEncontrada = null;
+    this.mensajeBusqueda = '';
+    this.obtenerListas();
   }
 
   limpiarFormulario(): void {
