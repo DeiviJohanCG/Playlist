@@ -77,6 +77,57 @@ export class ListaFormComponent implements OnInit {
     this.nuevaLista.canciones.splice(index, 1);
   }
 
+  crearLista(): void {
+    this.mensaje = '';
+
+    const nombre = this.sanitizarTexto(this.nuevaLista.nombre);
+    const descripcion = this.sanitizarTexto(this.nuevaLista.descripcion);
+
+    if (!nombre || !descripcion) {
+      this.mensaje = 'Debes ingresar el nombre y la descripción de la lista.';
+      return;
+    }
+
+    if (!this.esTextoValido(nombre) || !this.esTextoValido(descripcion)) {
+      this.mensaje = 'El nombre o la descripción contienen caracteres inválidos.';
+      return;
+    }
+
+    if (this.nuevaLista.canciones.length === 0) {
+      this.mensaje = 'Debes agregar al menos una canción a la lista.';
+      return;
+    }
+
+    const listaSanitizada: ListaReproduccion = {
+      nombre,
+      descripcion,
+      canciones: this.nuevaLista.canciones
+    };
+
+    this.apiService.crearLista(listaSanitizada).subscribe({
+      next: (listaCreada) => {
+        this.mensaje = `Lista "${listaCreada.nombre}" creada exitosamente.`;
+
+        this.nuevaLista = {
+          nombre: '',
+          descripcion: '',
+          canciones: []
+        };
+        this.nuevaCancion = {
+          titulo: '',
+          artista: '',
+          album: '',
+          anno: '',
+          genero: ''
+        };
+      },
+      error: (error) => {
+        this.mensaje = 'Error al crear la lista.';
+        console.error(error);
+      }
+    });
+  }
+
   sanitizarTexto(texto: string): string {
     return texto
       .trim()
