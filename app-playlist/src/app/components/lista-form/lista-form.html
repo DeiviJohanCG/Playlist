@@ -39,5 +39,48 @@
         {{ mensaje }}
       </p>
     </div>
+
+    <div class="listas">
+      <h2>Listas de reproducción existentes</h2>
+      <p *ngIf="mensajeLista" style="color: green;">{{ mensajeLista }}</p>
+
+      <!-- Mostrar todas las listas si no hay búsqueda activa -->
+      <ul *ngIf="!listaEncontrada && listas.length > 0; else sinListas">
+        <li *ngFor="let lista of listas">
+          <div class="encabezado-lista">
+            <div>
+              <strong>{{ lista.nombre }}</strong><br />
+              <span>{{ lista.descripcion }}</span>
+            </div>
+            <button (click)="eliminarLista(lista.nombre)">🗑 Eliminar</button>
+          </div>
+
+          <table class="tabla-canciones" *ngIf="lista.canciones.length > 0">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Artista</th>
+                <th>Álbum</th>
+                <th>Año</th>
+                <th>Género</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cancion of lista.canciones">
+                <td>{{ cancion.titulo }}</td>
+                <td>{{ cancion.artista }}</td>
+                <td>{{ cancion.album || '-' }}</td>
+                <td>{{ cancion.anno || '-' }}</td>
+                <td>{{ cancion.genero || '-' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+
+      <ng-template #sinListas>
+        <p *ngIf="!listaEncontrada">No hay listas de reproducción disponibles.</p>
+      </ng-template>
+    </div>
   </div>
 </div>
