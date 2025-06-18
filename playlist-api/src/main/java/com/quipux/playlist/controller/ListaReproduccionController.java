@@ -39,4 +39,9 @@ public class ListaReproduccionController {
     public List<ListaReproduccion> obtenerListas() {
         return service.obtenerListas();
     }
+    
+    @GetMapping("/{listName}")
+    public ListaReproduccion obtenerListaPorNombre(@PathVariable String listName) {
+        return service.obtenerListaPorNombre(listName);
+    }
 }

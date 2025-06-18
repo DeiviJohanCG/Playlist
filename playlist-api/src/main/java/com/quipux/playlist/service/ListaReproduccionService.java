@@ -67,6 +67,11 @@ public class ListaReproduccionService {
         return repo.findAll();
     }
     
+    public ListaReproduccion obtenerListaPorNombre(String nombre) {
+        return repo.findById(nombre)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "La lista no existe"));
+    }
+    
     private String sanitizarTexto(String texto) {
         if (texto == null) return "";
         return texto
