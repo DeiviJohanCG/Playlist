@@ -1,1 +1,43 @@
-<p>lista-form works!</p>
+<div class="playlist">
+  <div class="contenedor">
+    <div class="formulario">
+      <h2>Crear nueva lista de reproducción</h2>
+
+      <form (ngSubmit)="crearLista()">
+        <label>Nombre:</label>
+        <input type="text" [(ngModel)]="nuevaLista.nombre" name="nombre" required />
+
+        <label>Descripción:</label>
+        <input type="text" [(ngModel)]="nuevaLista.descripcion" name="descripcion" required />
+
+        <h3>Canciones</h3>
+        <div *ngFor="let cancion of nuevaLista.canciones; let i = index">
+          <p>
+            {{ cancion.titulo }} - {{ cancion.artista }}
+            <button type="button" (click)="eliminarCancion(i)">Eliminar</button>
+          </p>
+        </div>
+
+        <label>Título:</label>
+        <input type="text" [(ngModel)]="nuevaCancion.titulo" name="titulo" required />
+        <label>Artista:</label>
+        <input type="text" [(ngModel)]="nuevaCancion.artista" name="artista" required />
+        <label>Álbum:</label>
+        <input type="text" [(ngModel)]="nuevaCancion.album" name="album" />
+        <label>Año:</label>
+        <input type="text" [(ngModel)]="nuevaCancion.anno" name="anno" />
+        <label>Género:</label>
+        <input type="text" [(ngModel)]="nuevaCancion.genero" name="genero" />
+
+        <button type="button" (click)="agregarCancion()">Agregar canción</button>
+        <br /><br />
+        <button type="submit">Crear lista</button>
+        <button type="button" class="limpiar" (click)="limpiarFormulario()">Limpiar formulario</button>
+      </form>
+
+      <p [style.color]="mensaje.includes('Error') || mensaje.includes('Debes') ? 'red' : 'green'">
+        {{ mensaje }}
+      </p>
+    </div>
+  </div>
+</div>
