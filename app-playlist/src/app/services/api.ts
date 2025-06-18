@@ -44,6 +44,13 @@ export class ApiService {
     );
   }
 
+  eliminarLista(nombre: string): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/${encodeURIComponent(nombre)}`,
+      this.httpOptions
+    );
+  }
+
   listarTodas(): Observable<ListaReproduccion[]> {
     return this.http.get<ListaReproduccion[]>(this.apiUrl, this.httpOptions);
   }

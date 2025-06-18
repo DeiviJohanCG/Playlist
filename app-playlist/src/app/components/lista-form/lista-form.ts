@@ -140,6 +140,19 @@ export class ListaFormComponent implements OnInit {
     });
   }
 
+  eliminarLista(nombre: string): void {
+      this.apiService.eliminarLista(nombre).subscribe({
+        next: () => {
+          this.mensajeLista = `Lista "${nombre}" eliminada.`;
+          this.obtenerListas();
+        },
+        error: (err) => {
+          this.mensajeLista = `Error al eliminar la lista "${nombre}".`;
+          console.error(err);
+        }
+      });
+  }
+
   limpiarFormulario(): void {
     this.nuevaLista = {
       nombre: '',
