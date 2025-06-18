@@ -34,4 +34,9 @@ public class ListaReproduccionController {
             return ResponseEntity.badRequest().build();
         }
     }
+    
+    @GetMapping
+    public List<ListaReproduccion> obtenerListas() {
+        return service.obtenerListas();
+    }
 }

@@ -63,6 +63,10 @@ public class ListaReproduccionService {
         return repo.save(listaSanitizada);
     }
     
+    public List<ListaReproduccion> obtenerListas() {
+        return repo.findAll();
+    }
+    
     private String sanitizarTexto(String texto) {
         if (texto == null) return "";
         return texto
