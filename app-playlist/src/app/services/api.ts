@@ -32,8 +32,4 @@ export class ApiService {
   };
 
   constructor(private http: HttpClient) {}
-
-  crearLista(lista: ListaReproduccion): Observable<ListaReproduccion> {
-    return this.http.post<ListaReproduccion>(this.apiUrl, lista, this.httpOptions);
-  }
 }
