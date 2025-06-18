@@ -36,7 +36,7 @@ export class ListaFormComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    
+    this.obtenerListas();
   }
 
   agregarCancion(): void {
@@ -120,6 +120,8 @@ export class ListaFormComponent implements OnInit {
           anno: '',
           genero: ''
         };
+
+        this.obtenerListas();
       },
       error: (error) => {
         this.mensaje = 'Error al crear la lista.';

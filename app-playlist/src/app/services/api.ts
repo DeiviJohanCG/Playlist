@@ -37,6 +37,13 @@ export class ApiService {
     return this.http.post<ListaReproduccion>(this.apiUrl, lista, this.httpOptions);
   }
 
+  obtenerLista(nombre: string): Observable<ListaReproduccion> {
+    return this.http.get<ListaReproduccion>(
+      `${this.apiUrl}/${encodeURIComponent(nombre)}`,
+      this.httpOptions
+    );
+  }
+
   listarTodas(): Observable<ListaReproduccion[]> {
     return this.http.get<ListaReproduccion[]>(this.apiUrl, this.httpOptions);
   }
