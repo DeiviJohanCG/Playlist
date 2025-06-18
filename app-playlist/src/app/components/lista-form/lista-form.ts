@@ -128,6 +128,16 @@ export class ListaFormComponent implements OnInit {
     });
   }
 
+  obtenerListas(): void {
+    this.apiService.listarTodas().subscribe({
+      next: (listas) => this.listas = listas,
+      error: (err) => {
+        this.mensajeLista = 'Error al cargar las listas.';
+        console.error(err);
+      }
+    });
+  }
+
   limpiarFormulario(): void {
     this.nuevaLista = {
       nombre: '',
