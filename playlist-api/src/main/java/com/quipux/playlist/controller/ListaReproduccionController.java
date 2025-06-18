@@ -44,4 +44,10 @@ public class ListaReproduccionController {
     public ListaReproduccion obtenerListaPorNombre(@PathVariable String listName) {
         return service.obtenerListaPorNombre(listName);
     }
+    
+    @DeleteMapping("/{listName}")
+    public ResponseEntity<Void> eliminarLista(@PathVariable String listName) {
+        service.eliminarLista(listName);
+        return ResponseEntity.noContent().build();
+    }
 }

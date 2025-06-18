@@ -72,6 +72,13 @@ public class ListaReproduccionService {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "La lista no existe"));
     }
     
+    public void eliminarLista(String nombre) {
+        if (!repo.existsById(nombre)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La lista no existe");
+        }
+        repo.deleteById(nombre);
+    }
+    
     private String sanitizarTexto(String texto) {
         if (texto == null) return "";
         return texto
