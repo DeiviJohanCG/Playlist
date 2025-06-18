@@ -73,6 +73,10 @@ export class ListaFormComponent implements OnInit {
     };
   }
 
+  eliminarCancion(index: number): void {
+    this.nuevaLista.canciones.splice(index, 1);
+  }
+
   sanitizarTexto(texto: string): string {
     return texto
       .trim()
