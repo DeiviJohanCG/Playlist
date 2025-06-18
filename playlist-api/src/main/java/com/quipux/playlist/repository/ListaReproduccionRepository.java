@@ -1,5 +1,14 @@
 package com.quipux.playlist.repository;
 
-public class ListaReproduccionRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.quipux.playlist.entity.ListaReproduccion;
+
+/**
+ * 
+ * @author deivi
+ *
+ */
+public interface ListaReproduccionRepository extends JpaRepository<ListaReproduccion, String> {
 
 }
