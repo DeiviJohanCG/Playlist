@@ -128,6 +128,24 @@ export class ListaFormComponent implements OnInit {
     });
   }
 
+  limpiarFormulario(): void {
+    this.nuevaLista = {
+      nombre: '',
+      descripcion: '',
+      canciones: []
+    };
+
+    this.nuevaCancion = {
+      titulo: '',
+      artista: '',
+      album: '',
+      anno: '',
+      genero: ''
+    };
+
+    this.mensaje = '';
+  }
+
   sanitizarTexto(texto: string): string {
     return texto
       .trim()
